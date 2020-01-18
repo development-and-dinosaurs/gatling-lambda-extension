@@ -1,5 +1,6 @@
 plugins {
     scala
+    `maven-publish`
     id("com.diffplug.gradle.spotless") version "3.27.1"
     id("io.toolebox.git-versioner") version "1.3.0"
 }
@@ -17,5 +18,19 @@ dependencies {
 spotless {
     scala {
         scalafmt()
+    }
+}
+
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+            artifact(sourcesJar.get())
+        }
     }
 }
