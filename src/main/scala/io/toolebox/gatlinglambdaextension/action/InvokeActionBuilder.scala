@@ -6,6 +6,7 @@ import io.gatling.core.structure.ScenarioContext
 
 case class InvokeActionBuilder() extends ActionBuilder {
   override def build(ctx: ScenarioContext, next: Action): Action = {
-    new InvokeAction()
+    import ctx._
+    new InvokeAction(coreComponents, next)
   }
 }
