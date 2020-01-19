@@ -5,6 +5,7 @@ import java.net.URI
 import io.gatling.core.action.Action
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioContext
+import io.toolebox.gatlinglambdaextension.protocol.LambdaProtocol
 import software.amazon.awssdk.auth.credentials.{
   AwsBasicCredentials,
   StaticCredentialsProvider
@@ -14,18 +15,23 @@ import software.amazon.awssdk.services.lambda.LambdaClient
 
 case class InvokeActionBuilder() extends ActionBuilder {
   override def build(ctx: ScenarioContext, next: Action): Action = {
-    import ctx._
+    val protocol = ctx.protocolComponentsRegistry
+      .components(LambdaProtocol.lambdaProtocolKey)
+      .lambdaProtocol
+    import protocol._
     def client =
       LambdaClient
         .builder()
-        .region(Region.of("eu-west-1"))
+        .region(Region.of(region))
         .credentialsProvider(
           StaticCredentialsProvider
-            .create(AwsBasicCredentials.create("test", "test"))
+            .create(
+              AwsBasicCredentials.create(awsAccessKeyId, awsSecretAccessKey)
+            )
         )
-        .endpointOverride(URI.create("http://localhost:4574"))
+        .endpointOverride(URI.create(endpoint))
         .build()
 
-    new InvokeAction(client, coreComponents, next)
+    new InvokeAction(client, ctx.coreComponents, next)
   }
 }
