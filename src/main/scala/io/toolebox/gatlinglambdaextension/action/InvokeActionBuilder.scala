@@ -7,6 +7,7 @@ import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
 import io.toolebox.gatlinglambdaextension.protocol.LambdaProtocol
+import io.toolebox.gatlinglambdaextension.request.LambdaAttributes
 import software.amazon.awssdk.auth.credentials.{
   AwsBasicCredentials,
   StaticCredentialsProvider
@@ -14,7 +15,9 @@ import software.amazon.awssdk.auth.credentials.{
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.lambda.LambdaClient
 
-case class InvokeActionBuilder() extends ActionBuilder with NameGen {
+case class InvokeActionBuilder(attr: LambdaAttributes)
+    extends ActionBuilder
+    with NameGen {
   override def build(ctx: ScenarioContext, next: Action): Action = {
     val protocol = ctx.protocolComponentsRegistry
       .components(LambdaProtocol.lambdaProtocolKey)
@@ -33,6 +36,6 @@ case class InvokeActionBuilder() extends ActionBuilder with NameGen {
         .endpointOverride(URI.create(endpoint))
         .build()
 
-    new InvokeAction(client, ctx.coreComponents, next, genName("invoke"))
+    new InvokeAction(client, ctx.coreComponents, next, genName("invoke"), attr)
   }
 }
