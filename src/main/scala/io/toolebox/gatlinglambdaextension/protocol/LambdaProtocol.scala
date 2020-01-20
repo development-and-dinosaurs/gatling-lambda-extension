@@ -8,8 +8,8 @@ object LambdaProtocol {
 }
 
 case class LambdaProtocol(
-    awsAccessKeyId: String,
-    awsSecretAccessKey: String,
-    endpoint: String,
-    region: String
+    awsAccessKeyId: Option[String],
+    awsSecretAccessKey: Option[String],
+    endpoint: Option[String],
+    region: Option[String]
 ) extends Protocol {}
