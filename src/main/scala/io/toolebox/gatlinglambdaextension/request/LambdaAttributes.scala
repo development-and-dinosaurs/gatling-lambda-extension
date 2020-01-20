@@ -1,3 +1,8 @@
 package io.toolebox.gatlinglambdaextension.request
 
-case class LambdaAttributes(functionName: String, payload: Option[String])
+import io.gatling.core.session.Expression
+
+case class LambdaAttributes(
+    functionName: Expression[String],
+    payload: Option[Expression[String]]
+)
