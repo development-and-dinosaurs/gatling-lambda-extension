@@ -17,9 +17,9 @@ import software.amazon.awssdk.services.lambda.model.{
 class InvokeAction(
     lambdaClient: LambdaClient,
     coreComponents: CoreComponents,
-    val next: Action
-) extends ExitableAction
-    with NameGen {
+    val next: Action,
+    val name: String
+) extends ExitableAction {
 
   override def execute(session: Session): Unit = {
     val request = InvokeRequest.builder()
@@ -53,8 +53,6 @@ class InvokeAction(
     val successCodes = 200 to 299
     successCodes contains response.statusCode()
   }
-
-  override def name: String = genName("invoke")
 
   override def statsEngine: StatsEngine = coreComponents.statsEngine
 
