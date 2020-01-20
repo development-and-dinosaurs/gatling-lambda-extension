@@ -6,7 +6,7 @@ import io.gatling.core.CoreComponents
 import io.gatling.core.Predef.Session
 import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.stats.StatsEngine
-import io.gatling.core.util.NameGen
+import io.toolebox.gatlinglambdaextension.request.LambdaAttributes
 import software.amazon.awssdk.core.SdkBytes
 import software.amazon.awssdk.services.lambda.LambdaClient
 import software.amazon.awssdk.services.lambda.model.{
@@ -18,13 +18,16 @@ class InvokeAction(
     lambdaClient: LambdaClient,
     coreComponents: CoreComponents,
     val next: Action,
-    val name: String
+    val name: String,
+    val attr: LambdaAttributes
 ) extends ExitableAction {
 
   override def execute(session: Session): Unit = {
     val request = InvokeRequest.builder()
-    request.functionName("my-function")
-    request.payload(SdkBytes.fromUtf8String("payload"))
+    request.functionName(attr.functionName)
+    if (attr.payload.isDefined) {
+      request.payload(SdkBytes.fromUtf8String(attr.payload.get))
+    }
     var maybeResponse: Option[InvokeResponse] = None
     var maybeThrowable: Option[Throwable] = None
 
