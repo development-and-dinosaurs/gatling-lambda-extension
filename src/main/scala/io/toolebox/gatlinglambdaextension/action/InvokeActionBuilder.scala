@@ -32,7 +32,7 @@ case class InvokeActionBuilder(attr: LambdaAttributes)
       client.build(),
       ctx.coreComponents,
       next,
-      genName(attr.functionName),
+      genName(attr.functionName.toString()),
       attr
     )
   }

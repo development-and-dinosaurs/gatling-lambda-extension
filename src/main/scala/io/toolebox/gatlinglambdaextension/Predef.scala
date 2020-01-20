@@ -2,6 +2,7 @@ package io.toolebox.gatlinglambdaextension
 
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.GatlingConfiguration
+import io.gatling.core.session.Expression
 import io.toolebox.gatlinglambdaextension.protocol.{
   LambdaProtocol,
   LambdaProtocolBuilder
@@ -10,7 +11,7 @@ import io.toolebox.gatlinglambdaextension.request.LambdaInvokeBuilder
 
 object Predef {
 
-  def lambda(function: String): LambdaInvokeBuilder =
+  def lambda(function: Expression[String]): LambdaInvokeBuilder =
     LambdaInvokeBuilder(function)
   def lambda(
       implicit configuration: GatlingConfiguration

@@ -24,13 +24,22 @@ class InvokeAction(
 
   override def execute(session: Session): Unit = {
     val request = InvokeRequest.builder()
-    request.functionName(attr.functionName)
+    attr.functionName(session).map { function =>
+      request.functionName(function)
+    }
+    attr.payload.map(
+      payload =>
+        payload(session)
+          .map(payload => request.payload(SdkBytes.fromUtf8String(payload)))
+    )
+
     if (attr.payload.isDefined) {
-      request.payload(SdkBytes.fromUtf8String(attr.payload.get))
+      attr.payload
+        .get(session)
+        .map(payload => request.payload(SdkBytes.fromUtf8String(payload)))
     }
     var maybeResponse: Option[InvokeResponse] = None
     var maybeThrowable: Option[Throwable] = None
-
     val start = clock.nowMillis
     try {
       maybeResponse = Some(lambdaClient.invoke(request.build()))
