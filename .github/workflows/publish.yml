@@ -17,4 +17,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Publish
+      env:
+        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.signingKey }}
+        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.signingPassword }}
+        ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.sonatypeUsername }}
+        ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.sonatypePassword }}
       run: ./gradlew publish -Prelease=true
