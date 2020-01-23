@@ -1,4 +1,5 @@
 import java.time.Duration
+import java.util.Base64
 plugins {
     scala
     signing
@@ -76,9 +77,13 @@ publishing {
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
+	val decodedKey = decode(signingKey)
+    useInMemoryPgpKeys(decodedKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
+
+fun decode(value: String?) =
+    if (value == null) "" else String(Base64.getDecoder().decode(value))
 
 tasks.withType<Sign>().configureEach {
     onlyIf { project.findProperty("release") == "true" }
@@ -91,7 +96,6 @@ nexusStaging {
     numberOfRetries = 60
     delayBetweenRetriesInMillis = 5000
 }
-
 nexusPublishing {
     connectTimeout.set(Duration.ofMinutes(5))
     clientTimeout.set(Duration.ofMinutes(5))
