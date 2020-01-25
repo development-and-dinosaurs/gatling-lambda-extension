@@ -65,7 +65,7 @@ publishing {
 signing {
     val signingKey: String? by project
     val signingPassword: String? by project
-	val decodedKey = decode(signingKey)
+    val decodedKey = decode(signingKey)
     useInMemoryPgpKeys(decodedKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
@@ -78,8 +78,8 @@ tasks.withType<Sign>().configureEach {
 }
 
 nexusStaging {
-	username = project.findProperty("sonatypeUsername") as String
-	password = project.findProperty("sonatypePassword") as String
+    username = project.findProperty("sonatypeUsername") as String
+    password = project.findProperty("sonatypePassword") as String
     packageGroup = project.group.toString()
     numberOfRetries = 60
     delayBetweenRetriesInMillis = 5000

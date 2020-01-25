@@ -20,4 +20,4 @@ jobs:
         ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.signingPassword }}
         ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.sonatypeUsername }}
         ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.sonatypePassword }}
-      run: ./gradlew publishToSonatype closeAndReleaseRepository -Prelease=true
+      run: ./gradlew publishToSonatype closeAndReleaseRepository -Prelease
