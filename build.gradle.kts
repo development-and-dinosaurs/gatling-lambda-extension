@@ -78,12 +78,13 @@ tasks.withType<Sign>().configureEach {
 }
 
 nexusStaging {
-    username = project.findProperty("sonatypeUsername") as String
-    password = project.findProperty("sonatypePassword") as String
+    username = project.findProperty("sonatypeUsername") as String?
+    password = project.findProperty("sonatypePassword") as String?
     packageGroup = project.group.toString()
     numberOfRetries = 60
     delayBetweenRetriesInMillis = 5000
 }
+
 nexusPublishing {
     connectTimeout.set(Duration.ofMinutes(5))
     clientTimeout.set(Duration.ofMinutes(5))
