@@ -13,6 +13,7 @@ import software.amazon.awssdk.auth.credentials.{
   AwsSessionCredentials,
   StaticCredentialsProvider
 }
+import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.lambda.{
   LambdaClient,
@@ -25,6 +26,7 @@ case class InvokeActionBuilder(attr: LambdaAttributes)
   override def build(ctx: ScenarioContext, next: Action): Action = {
     val protocol = getProtocol(ctx)
     val client = LambdaClient.builder()
+    maybeSetTimeout(protocol, client)
     maybeSetCredentials(protocol, client)
     maybeSetRegion(protocol, client)
     maybeSetEndpoint(protocol, client)
@@ -42,6 +44,22 @@ case class InvokeActionBuilder(attr: LambdaAttributes)
     ctx.protocolComponentsRegistry
       .components(LambdaProtocol.lambdaProtocolKey)
       .lambdaProtocol
+  }
+
+  private def maybeSetTimeout(
+      protocol: LambdaProtocol,
+      client: LambdaClientBuilder
+  ) {
+    val timeout = protocol.timeout
+    if (timeout.isDefined) {
+      client.overrideConfiguration(
+        ClientOverrideConfiguration
+          .builder()
+          .apiCallAttemptTimeout(timeout.get)
+          .apiCallTimeout(timeout.get)
+          .build()
+      )
+    }
   }
 
   private def maybeSetCredentials(
