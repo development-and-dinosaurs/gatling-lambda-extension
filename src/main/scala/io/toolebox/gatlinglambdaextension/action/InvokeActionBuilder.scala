@@ -10,6 +10,7 @@ import io.toolebox.gatlinglambdaextension.protocol.LambdaProtocol
 import io.toolebox.gatlinglambdaextension.request.LambdaAttributes
 import software.amazon.awssdk.auth.credentials.{
   AwsBasicCredentials,
+  AwsSessionCredentials,
   StaticCredentialsProvider
 }
 import software.amazon.awssdk.regions.Region
@@ -49,8 +50,17 @@ case class InvokeActionBuilder(attr: LambdaAttributes)
   ) {
     val accessKey = protocol.awsAccessKeyId
     val secretKey = protocol.awsSecretAccessKey
+    val sessionToken = protocol.awsSessionToken
     if (accessKey.isEmpty && secretKey.isEmpty) {
       // implicit return
+    } else if (accessKey.isDefined && secretKey.isDefined && sessionToken.isDefined) {
+      client.credentialsProvider(
+        StaticCredentialsProvider
+          .create(
+            AwsSessionCredentials
+              .create(accessKey.get, secretKey.get, sessionToken.get)
+          )
+      )
     } else if (accessKey.isDefined && secretKey.isDefined) {
       client.credentialsProvider(
         StaticCredentialsProvider

@@ -10,6 +10,7 @@ object LambdaProtocol {
 case class LambdaProtocol(
     awsAccessKeyId: Option[String],
     awsSecretAccessKey: Option[String],
+    awsSessionToken: Option[String],
     endpoint: Option[String],
     region: Option[String]
 ) extends Protocol {}
