@@ -3,9 +3,9 @@ import java.util.Base64
 plugins {
     scala
     signing
-    id("com.diffplug.gradle.spotless") version "3.27.1"
-    id("io.toolebox.git-versioner") version "1.3.0"
-    id("io.codearte.nexus-staging") version "0.21.2"
+    id("com.diffplug.spotless") version "5.8.1"
+    id("io.toolebox.git-versioner") version "1.6.5"
+    id("io.codearte.nexus-staging") version "0.22.0"
     id("de.marcphilipp.nexus-publish") version "0.4.0"
 }
 
