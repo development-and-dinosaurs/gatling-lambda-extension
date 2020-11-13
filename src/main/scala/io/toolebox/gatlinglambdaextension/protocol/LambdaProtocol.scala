@@ -1,8 +1,7 @@
 package io.toolebox.gatlinglambdaextension.protocol
 
-import java.time.Duration
-
 import io.gatling.core.protocol.{Protocol, ProtocolKey}
+import software.amazon.awssdk.services.lambda.LambdaClient
 
 object LambdaProtocol {
   val lambdaProtocolKey: ProtocolKey[LambdaProtocol, LambdaComponents] =
@@ -10,10 +9,5 @@ object LambdaProtocol {
 }
 
 case class LambdaProtocol(
-    awsAccessKeyId: Option[String],
-    awsSecretAccessKey: Option[String],
-    awsSessionToken: Option[String],
-    timeout: Option[Duration],
-    endpoint: Option[String],
-    region: Option[String]
+    lambdaClient: LambdaClient
 ) extends Protocol {}
