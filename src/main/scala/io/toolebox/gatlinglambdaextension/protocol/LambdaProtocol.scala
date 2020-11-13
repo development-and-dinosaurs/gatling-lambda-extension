@@ -8,6 +8,4 @@ object LambdaProtocol {
     new LambdaProtocolKey
 }
 
-case class LambdaProtocol(
-    lambdaClient: LambdaClient
-) extends Protocol {}
+case class LambdaProtocol(lambdaClient: LambdaClient) extends Protocol {}

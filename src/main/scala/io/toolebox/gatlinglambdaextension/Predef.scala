@@ -13,6 +13,7 @@ object Predef {
 
   def lambda(function: Expression[String]): LambdaInvokeBuilder =
     LambdaInvokeBuilder(function)
+
   def lambda(
       implicit configuration: GatlingConfiguration
   ): LambdaProtocolBuilder = LambdaProtocolBuilder()
