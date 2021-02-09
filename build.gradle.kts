@@ -32,6 +32,13 @@ java {
     withJavadocJar()
 }
 
+versioner {
+    startFrom {
+        major = 3
+        minor = 2
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
