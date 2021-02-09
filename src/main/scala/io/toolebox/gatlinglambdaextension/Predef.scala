@@ -1,5 +1,6 @@
 package io.toolebox.gatlinglambdaextension
 
+import scala.language.implicitConversions
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session.Expression
