@@ -37,6 +37,9 @@ versioner {
         major = 3
         minor = 2
     }
+    tag {
+        useCommitMessage = true
+    }
 }
 
 publishing {
