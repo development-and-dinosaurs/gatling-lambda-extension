@@ -8,7 +8,7 @@ case class LambdaComponents(
     coreComponents: CoreComponents,
     lambdaProtocol: LambdaProtocol
 ) extends ProtocolComponents {
-  override def onStart: Session => Session = ProtocolComponents.NoopOnStart
+  override def onStart: Session => Session = Session.Identity
 
   override def onExit: Session => Unit = ProtocolComponents.NoopOnExit
 }

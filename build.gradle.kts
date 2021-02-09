@@ -3,10 +3,10 @@ import java.util.Base64
 plugins {
     scala
     signing
-    id("com.diffplug.spotless") version "5.8.1"
-    id("io.toolebox.git-versioner") version "1.6.5"
-    id("io.codearte.nexus-staging") version "0.22.0"
-    id("de.marcphilipp.nexus-publish") version "0.4.0"
+    id("com.diffplug.spotless") version Versions.spotless
+    id("io.toolebox.git-versioner") version Versions.versioner
+    id("io.codearte.nexus-staging") version Versions.nexusStaging
+    id("de.marcphilipp.nexus-publish") version Versions.nexusPublish
 }
 
 group = "io.toolebox"
@@ -16,9 +16,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.scala-lang:scala-library:2.12.10")
-    implementation("io.gatling:gatling-core:3.3.1")
-    implementation("software.amazon.awssdk:lambda:2.10.50")
+    implementation("org.scala-lang:scala-library:${Versions.scala}")
+    implementation("io.gatling:gatling-core:${Versions.gatling}")
+    implementation("software.amazon.awssdk:lambda:${Versions.awsSdk}")
 }
 
 spotless {
@@ -30,6 +30,16 @@ spotless {
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+versioner {
+    startFrom {
+        major = 3
+        minor = 2
+    }
+    tag {
+        useCommitMessage = true
+    }
 }
 
 publishing {

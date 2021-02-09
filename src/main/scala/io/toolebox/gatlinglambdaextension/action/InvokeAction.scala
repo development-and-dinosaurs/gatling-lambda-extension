@@ -70,8 +70,17 @@ class InvokeAction(
 
   override def clock: Clock = coreComponents.clock
 
-  private def logSuccess(session: Session, start: Long, end: Long) {
-    statsEngine.logResponse(session, name, start, end, OK, None, None)
+  private def logSuccess(session: Session, start: Long, end: Long): Unit = {
+    statsEngine.logResponse(
+      session.scenario,
+      session.groups,
+      name,
+      start,
+      end,
+      OK,
+      None,
+      None
+    )
     next ! session.markAsSucceeded
   }
 
@@ -80,8 +89,17 @@ class InvokeAction(
       start: Long,
       end: Long,
       message: String
-  ) {
-    statsEngine.logResponse(session, name, start, end, KO, None, Some(message))
+  ): Unit = {
+    statsEngine.logResponse(
+      session.scenario,
+      session.groups,
+      name,
+      start,
+      end,
+      KO,
+      None,
+      Some(message)
+    )
     next ! session.markAsFailed
   }
 
