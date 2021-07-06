@@ -4,12 +4,12 @@ plugins {
     scala
     signing
     id("com.diffplug.spotless") version Versions.spotless
-    id("io.toolebox.git-versioner") version Versions.versioner
     id("io.codearte.nexus-staging") version Versions.nexusStaging
     id("de.marcphilipp.nexus-publish") version Versions.nexusPublish
 }
 
 group = "io.toolebox"
+version = "3.6.0"
 
 repositories {
     mavenCentral()
@@ -30,16 +30,6 @@ spotless {
 java {
     withSourcesJar()
     withJavadocJar()
-}
-
-versioner {
-    startFrom {
-        major = 3
-        minor = 2
-    }
-    tag {
-        useCommitMessage = true
-    }
 }
 
 publishing {
