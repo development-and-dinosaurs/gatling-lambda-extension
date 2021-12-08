@@ -92,3 +92,8 @@ nexusPublishing {
         sonatype()
     }
 }
+
+tasks.withType<AbstractArchiveTask>() {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
