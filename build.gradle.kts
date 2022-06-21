@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.toolebox"
-version = "3.6.0"
+version = "3.6.0.1"
 
 repositories {
     mavenCentral()
