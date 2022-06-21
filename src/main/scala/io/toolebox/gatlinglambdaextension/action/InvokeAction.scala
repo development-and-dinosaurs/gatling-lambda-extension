@@ -26,8 +26,10 @@ class InvokeAction(
 
   override def execute(session: Session): Unit = {
     var requestName: String = ""
-    if (attr.requestName.isDefined){
-      attr.requestName.map(name => name(session).map(name => requestName = name + id))
+    if (attr.requestName.isDefined) {
+      attr.requestName.map(
+        name => name(session).map(name => requestName = name + id)
+      )
     } else {
       requestName = "invoke" + id
     }
@@ -61,10 +63,22 @@ class InvokeAction(
       if (isSuccessful(response)) {
         logSuccess(requestName, session, start, end)
       } else {
-        logFailure(requestName, session, start, end, s"Status ${response.statusCode()}")
+        logFailure(
+          requestName,
+          session,
+          start,
+          end,
+          s"Status ${response.statusCode()}"
+        )
       }
     } else {
-      logFailure(requestName, session, start, end, maybeThrowable.get.getMessage)
+      logFailure(
+        requestName,
+        session,
+        start,
+        end,
+        maybeThrowable.get.getMessage
+      )
     }
 
   }
