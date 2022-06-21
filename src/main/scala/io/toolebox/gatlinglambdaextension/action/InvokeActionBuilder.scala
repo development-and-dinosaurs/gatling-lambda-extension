@@ -13,8 +13,7 @@ case class InvokeActionBuilder(attr: LambdaAttributes)
   override def build(ctx: ScenarioContext, next: Action): Action = {
     val protocol = getProtocol(ctx)
     val client = protocol.lambdaClient
-
-    new InvokeAction(client, ctx.coreComponents, next, genName("invoke"), attr)
+    new InvokeAction(client, ctx.coreComponents, next, genName(""), attr)
   }
 
   private def getProtocol(ctx: ScenarioContext) = {
