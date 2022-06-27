@@ -18,11 +18,21 @@ class InvokeAction(
     lambdaClient: LambdaClient,
     coreComponents: CoreComponents,
     val next: Action,
-    val name: String,
+    val id: String,
     val attr: LambdaAttributes
 ) extends ExitableAction {
 
+  override def name: String = "InvokeAction"
+
   override def execute(session: Session): Unit = {
+    var requestName: String = ""
+    if (attr.requestName.isDefined) {
+      attr.requestName.map(
+        name => name(session).map(name => requestName = name + id)
+      )
+    } else {
+      requestName = "invoke" + id
+    }
     val request = InvokeRequest.builder()
     attr.functionName(session).map { function =>
       request.functionName(function)
@@ -51,12 +61,24 @@ class InvokeAction(
     if (maybeResponse.isDefined) {
       val response = maybeResponse.get
       if (isSuccessful(response)) {
-        logSuccess(session, start, end)
+        logSuccess(requestName, session, start, end)
       } else {
-        logFailure(session, start, end, s"Status ${response.statusCode()}")
+        logFailure(
+          requestName,
+          session,
+          start,
+          end,
+          s"Status ${response.statusCode()}"
+        )
       }
     } else {
-      logFailure(session, start, end, maybeThrowable.get.getMessage)
+      logFailure(
+        requestName,
+        session,
+        start,
+        end,
+        maybeThrowable.get.getMessage
+      )
     }
 
   }
@@ -70,11 +92,16 @@ class InvokeAction(
 
   override def clock: Clock = coreComponents.clock
 
-  private def logSuccess(session: Session, start: Long, end: Long): Unit = {
+  private def logSuccess(
+      requestName: String,
+      session: Session,
+      start: Long,
+      end: Long
+  ): Unit = {
     statsEngine.logResponse(
       session.scenario,
       session.groups,
-      name,
+      requestName,
       start,
       end,
       OK,
@@ -85,6 +112,7 @@ class InvokeAction(
   }
 
   private def logFailure(
+      requestName: String,
       session: Session,
       start: Long,
       end: Long,
@@ -93,7 +121,7 @@ class InvokeAction(
     statsEngine.logResponse(
       session.scenario,
       session.groups,
-      name,
+      requestName,
       start,
       end,
       KO,
