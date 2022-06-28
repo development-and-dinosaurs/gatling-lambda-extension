@@ -1,6 +1,7 @@
 import java.time.Duration
 import java.util.Base64
 plugins {
+    `maven-publish`
     scala
     signing
     id("com.diffplug.spotless") version Versions.spotless
