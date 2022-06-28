@@ -5,7 +5,7 @@ plugins {
     signing
     id("com.diffplug.spotless") version Versions.spotless
     id("io.codearte.nexus-staging") version Versions.nexusStaging
-    id("de.marcphilipp.nexus-publish") version Versions.nexusPublish
+    id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
 }
 
 group = "io.toolebox"
