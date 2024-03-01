@@ -8,12 +8,16 @@ import uk.co.developmentanddinosaurs.gatling.lambda.javaapi.protocol.LambdaProto
 
 public class LambdaDsl {
 
-    public static final LambdaProtocolBuilder lambda =
-            new LambdaProtocolBuilder(uk.co.developmentanddinosaurs.gatling.lambda.protocol.LambdaProtocolBuilder.apply(Predef.configuration()));
+  public static final LambdaProtocolBuilder lambda =
+      new LambdaProtocolBuilder(
+          uk.co.developmentanddinosaurs.gatling.lambda.protocol.LambdaProtocolBuilder.apply(
+              Predef.configuration()));
 
-    private LambdaDsl(){}
+  private LambdaDsl() {}
 
-    public static InvokeActionBuilder lambda(String functionName) {
-        return new InvokeActionBuilder(uk.co.developmentanddinosaurs.gatling.lambda.action.InvokeActionBuilder.apply(Expressions.toStringExpression(functionName), Option.empty(), Option.empty()));
-    }
+  public static InvokeActionBuilder lambda(String functionName) {
+    return new InvokeActionBuilder(
+        uk.co.developmentanddinosaurs.gatling.lambda.action.InvokeActionBuilder.apply(
+            Expressions.toStringExpression(functionName), Option.empty(), Option.empty()));
+  }
 }

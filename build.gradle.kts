@@ -30,6 +30,12 @@ spotless {
     scala {
         scalafmt()
     }
+    java {
+        googleJavaFormat()
+    }
+    kotlinGradle {
+        ktlint()
+    }
 }
 
 java {
