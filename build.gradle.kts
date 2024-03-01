@@ -6,6 +6,7 @@ plugins {
     signing
     id("com.diffplug.spotless") version Versions.spotless
     id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
+    id("io.gatling.gradle") version Versions.gatling
 }
 
 group = "uk.co.developmentanddinosaurs"
@@ -19,6 +20,8 @@ dependencies {
     implementation("org.scala-lang:scala-library:${Versions.scala}")
     implementation("io.gatling:gatling-core:${Versions.gatling}")
     implementation("software.amazon.awssdk:lambda:${Versions.awsSdk}")
+
+    gatling("software.amazon.awssdk:lambda:${Versions.awsSdk}")
 }
 
 spotless {
