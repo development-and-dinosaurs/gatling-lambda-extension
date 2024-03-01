@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation("org.scala-lang:scala-library:${Versions.scala}")
     implementation("io.gatling:gatling-core:${Versions.gatling}")
+    implementation("io.gatling:gatling-core-java:${Versions.gatling}")
     implementation("software.amazon.awssdk:lambda:${Versions.awsSdk}")
     implementation("com.softwaremill.quicklens:quicklens_2.13:1.9.7")
 
@@ -87,7 +88,15 @@ fun decode(base64Key: String?): String {
     return if (base64Key == null) "" else String(Base64.getDecoder().decode(base64Key))
 }
 
-tasks.withType<AbstractArchiveTask>() {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
+tasks {
+    withType<AbstractArchiveTask> {
+        isPreserveFileTimestamps = false
+        isReproducibleFileOrder = true
+    }
+    named<AbstractCompile>("compileScala") {
+        classpath = sourceSets.main.get().compileClasspath
+    }
+    named<AbstractCompile>("compileJava") {
+        classpath += files(sourceSets.main.get().scala.classesDirectory)
+    }
 }
