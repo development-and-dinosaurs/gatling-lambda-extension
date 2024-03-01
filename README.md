@@ -1,9 +1,9 @@
 # Gatling Lambda Extension
 ![Maven metadata URL](https://img.shields.io/maven-metadata/v?label=latest%20release&logo=gatling&metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Ftoolebox%2Fgatling-lambda-extension%2Fmaven-metadata.xml&style=for-the-badge)
-[![Release Date](https://img.shields.io/github/release-date/toolebox-io/gatling-lambda-extension?logo=gatling&style=for-the-badge)](https://github.com/toolebox-io/gatling-lambda-extension/releases)  
-[![Build Status](https://img.shields.io/github/workflow/status/toolebox-io/gatling-lambda-extension/Publish/master?style=for-the-badge&logo=github)](https://github.com/toolebox-io/gatling-lambda-extension/actions?query=workflow%3APublish)
-[![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/toolebox-io_gatling-lambda-extension?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/dashboard?id=toolebox-io_gatling-lambda-extension)  
-[![MIT License](https://img.shields.io/github/license/toolebox-io/gatling-lambda-extension?style=for-the-badge&logo=pagekit)](https://github.com/toolebox-io/gatling-lambda-extension/blob/master/LICENSE)
+[![Release Date](https://img.shields.io/github/release-date/development-and-dinosaurs/gatling-lambda-extension?logo=gatling&style=for-the-badge)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/releases)  
+[![Build Status](https://img.shields.io/github/workflow/status/development-and-dinosaurs/gatling-lambda-extension/Publish/master?style=for-the-badge&logo=github)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/actions?query=workflow%3APublish)
+[![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/development-and-dinosaurs_gatling-lambda-extension?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/dashboard?id=development-and-dinosaurs_gatling-lambda-extension)  
+[![MIT License](https://img.shields.io/github/license/development-and-dinosaurs/gatling-lambda-extension?style=for-the-badge&logo=pagekit)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/blob/master/LICENSE)
 
 ## What is the Gatling Lambda Extension?
 This library is a [Gatling Extension](https://gatling.io/docs/gatling/reference/current/extensions/) that adds support for invoking lambda functions directly using Gatling. 
