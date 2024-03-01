@@ -1,4 +1,4 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol
+package uk.co.developmentanddinosaurs.gatling.lambda.protocol
 
 import io.gatling.core.CoreComponents
 import io.gatling.core.config.GatlingConfiguration
@@ -18,5 +18,5 @@ case class LambdaProtocolKey()
   override def newComponents(
       coreComponents: CoreComponents
   ): LambdaProtocol => LambdaComponents =
-    lambdaProtocol => LambdaComponents(coreComponents, lambdaProtocol)
+    lambdaProtocol => LambdaComponents(lambdaProtocol)
 }

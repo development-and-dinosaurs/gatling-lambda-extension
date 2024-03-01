@@ -6,10 +6,11 @@ plugins {
     signing
     id("com.diffplug.spotless") version Versions.spotless
     id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
+    id("io.gatling.gradle") version Versions.gatling
+    id("uk.co.developmentanddinosaurs.git-versioner") version Versions.gitVersioner
 }
 
 group = "uk.co.developmentanddinosaurs"
-version = "3.6.0.1"
 
 repositories {
     mavenCentral()
@@ -18,18 +19,35 @@ repositories {
 dependencies {
     implementation("org.scala-lang:scala-library:${Versions.scala}")
     implementation("io.gatling:gatling-core:${Versions.gatling}")
+    implementation("io.gatling:gatling-core-java:${Versions.gatling}")
     implementation("software.amazon.awssdk:lambda:${Versions.awsSdk}")
+    implementation("com.softwaremill.quicklens:quicklens_2.13:1.9.7")
+
+    gatling("software.amazon.awssdk:lambda:${Versions.awsSdk}")
 }
 
 spotless {
     scala {
         scalafmt()
     }
+    java {
+        googleJavaFormat()
+    }
+    kotlinGradle {
+        ktlint()
+    }
 }
 
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+versioner {
+    startFrom {
+        major = 3
+        minor = 7
+    }
 }
 
 nexusPublishing {
@@ -83,7 +101,15 @@ fun decode(base64Key: String?): String {
     return if (base64Key == null) "" else String(Base64.getDecoder().decode(base64Key))
 }
 
-tasks.withType<AbstractArchiveTask>() {
-    isPreserveFileTimestamps = false
-    isReproducibleFileOrder = true
+tasks {
+    withType<AbstractArchiveTask> {
+        isPreserveFileTimestamps = false
+        isReproducibleFileOrder = true
+    }
+    named<AbstractCompile>("compileScala") {
+        classpath = sourceSets.main.get().compileClasspath
+    }
+    named<AbstractCompile>("compileJava") {
+        classpath += files(sourceSets.main.get().scala.classesDirectory)
+    }
 }

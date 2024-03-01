@@ -1,4 +1,4 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.request
+package uk.co.developmentanddinosaurs.gatling.lambda.request
 
 import io.gatling.core.session.Expression
 
