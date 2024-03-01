@@ -1,4 +1,4 @@
-package io.toolebox.gatlinglambdaextension.protocol
+package uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol
 
 import io.gatling.core.CoreComponents
 import io.gatling.core.protocol.ProtocolComponents

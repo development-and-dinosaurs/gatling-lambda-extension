@@ -19,7 +19,7 @@ A really simple example simulation using this is something like this:
 ```scala
 import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
-import io.toolebox.gatlinglambdaextension.Predef._
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.Predef._
 import software.amazon.awssdk.services.lambda.LambdaClient
 
 class ExampleSimulation extends Simulation {

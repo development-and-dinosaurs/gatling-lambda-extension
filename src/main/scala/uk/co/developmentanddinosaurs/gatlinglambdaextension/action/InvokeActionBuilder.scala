@@ -1,11 +1,11 @@
-package io.toolebox.gatlinglambdaextension.action
+package uk.co.developmentanddinosaurs.gatlinglambdaextension.action
 
 import io.gatling.core.action.Action
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.util.NameGen
-import io.toolebox.gatlinglambdaextension.protocol.LambdaProtocol
-import io.toolebox.gatlinglambdaextension.request.LambdaAttributes
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol.LambdaProtocol
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.request.LambdaAttributes
 
 case class InvokeActionBuilder(attr: LambdaAttributes)
     extends ActionBuilder

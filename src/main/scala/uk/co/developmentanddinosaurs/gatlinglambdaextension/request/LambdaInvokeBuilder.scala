@@ -1,7 +1,7 @@
-package io.toolebox.gatlinglambdaextension.request
+package uk.co.developmentanddinosaurs.gatlinglambdaextension.request
 
 import io.gatling.core.session.Expression
-import io.toolebox.gatlinglambdaextension.action.InvokeActionBuilder
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.action.InvokeActionBuilder
 
 case class LambdaInvokeBuilder(
     function: Expression[String],
