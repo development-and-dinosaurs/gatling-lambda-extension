@@ -1,5 +1,5 @@
 # Gatling Lambda Extension
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?label=latest%20release&logo=gatling&metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Ftoolebox%2Fgatling-lambda-extension%2Fmaven-metadata.xml&style=for-the-badge)
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?label=latest%20release&logo=gatling&metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fuk%2Fco%2Fdevelopmentanddinosaurs%2Fgatling-lambda-extension%2Fmaven-metadata.xml&style=for-the-badge)
 [![Release Date](https://img.shields.io/github/release-date/development-and-dinosaurs/gatling-lambda-extension?logo=gatling&style=for-the-badge)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/releases)  
 [![Build Status](https://img.shields.io/github/actions/workflow/status/development-and-dinosaurs/gatling-lambda-extension/publish.yml?branch=master&style=for-the-badge&logo=github)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/actions?query=workflow%3APublish)
 [![MIT License](https://img.shields.io/github/license/development-and-dinosaurs/gatling-lambda-extension?style=for-the-badge&logo=pagekit)](https://github.com/development-and-dinosaurs/gatling-lambda-extension/blob/master/LICENSE)
@@ -55,15 +55,14 @@ import software.amazon.awssdk.services.lambda.LambdaClient;
 import uk.co.developmentanddinosaurs.gatling.lambda.javaapi.protocol.LambdaProtocolBuilder;
 
 public class ExampleSimulationJava extends Simulation {
-
-  LambdaProtocolBuilder protocol = lambda.client(LambdaClient.create());
-  ScenarioBuilder scenario =
-    scenario("Example Scenario")
-      .exec(lambda("my-lambda-function-name").payload("{\"myKey\": \"myValue\"}"));
-
-  {
-    setUp(scenario.injectOpen(atOnceUsers(1))).protocols(protocol);
-  }
+    public ExampleSimulationJava() {
+        LambdaClient client = LambdaClient.create();
+        LambdaProtocolBuilder protocol = lambda.client(client);
+        ScenarioBuilder scenario =
+                scenario("Example Scenario")
+                        .exec(lambda("my-lambda-function-name").payload("{\"myKey\": \"myValue\"}"));
+        setUp(scenario.injectOpen(atOnceUsers(1))).protocols(protocol);
+    }
 }
 ```
 </details>
