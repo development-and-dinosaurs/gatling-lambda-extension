@@ -1,14 +1,14 @@
-package io.toolebox.gatlinglambdaextension
+package uk.co.developmentanddinosaurs.gatlinglambdaextension
 
 import scala.language.implicitConversions
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session.Expression
-import io.toolebox.gatlinglambdaextension.protocol.{
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol.{
   LambdaProtocol,
   LambdaProtocolBuilder
 }
-import io.toolebox.gatlinglambdaextension.request.LambdaInvokeBuilder
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.request.LambdaInvokeBuilder
 
 object Predef {
 

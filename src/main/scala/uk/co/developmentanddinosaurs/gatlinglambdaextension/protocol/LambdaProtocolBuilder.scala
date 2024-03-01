@@ -1,4 +1,4 @@
-package io.toolebox.gatlinglambdaextension.protocol
+package uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol
 
 import software.amazon.awssdk.services.lambda.LambdaClient
 

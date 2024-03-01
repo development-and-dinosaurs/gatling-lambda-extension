@@ -9,7 +9,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
 }
 
-group = "io.toolebox"
+group = "uk.co.developmentanddinosaurs"
 version = "3.6.0.1"
 
 repositories {

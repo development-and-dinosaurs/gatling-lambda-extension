@@ -1,4 +1,4 @@
-package io.toolebox.gatlinglambdaextension.action
+package uk.co.developmentanddinosaurs.gatlinglambdaextension.action
 
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.commons.util.Clock
@@ -6,7 +6,7 @@ import io.gatling.core.CoreComponents
 import io.gatling.core.Predef.Session
 import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.stats.StatsEngine
-import io.toolebox.gatlinglambdaextension.request.LambdaAttributes
+import uk.co.developmentanddinosaurs.gatlinglambdaextension.request.LambdaAttributes
 import software.amazon.awssdk.core.SdkBytes
 import software.amazon.awssdk.services.lambda.LambdaClient
 import software.amazon.awssdk.services.lambda.model.{
