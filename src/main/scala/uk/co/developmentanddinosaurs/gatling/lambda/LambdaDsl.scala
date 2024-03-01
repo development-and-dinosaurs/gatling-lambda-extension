@@ -1,16 +1,13 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension
+package uk.co.developmentanddinosaurs.gatling.lambda
 
 import scala.language.implicitConversions
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session.Expression
-import uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol.{
-  LambdaProtocol,
-  LambdaProtocolBuilder
-}
-import uk.co.developmentanddinosaurs.gatlinglambdaextension.request.LambdaInvokeBuilder
+import uk.co.developmentanddinosaurs.gatling.lambda.protocol.{LambdaProtocol, LambdaProtocolBuilder}
+import uk.co.developmentanddinosaurs.gatling.lambda.request.LambdaInvokeBuilder
 
-object Predef {
+class LambdaDsl {
 
   def lambda(function: Expression[String]): LambdaInvokeBuilder =
     LambdaInvokeBuilder(function)
