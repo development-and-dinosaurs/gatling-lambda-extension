@@ -18,5 +18,5 @@ case class LambdaProtocolKey()
   override def newComponents(
       coreComponents: CoreComponents
   ): LambdaProtocol => LambdaComponents =
-    lambdaProtocol => LambdaComponents(coreComponents, lambdaProtocol)
+    lambdaProtocol => LambdaComponents(lambdaProtocol)
 }

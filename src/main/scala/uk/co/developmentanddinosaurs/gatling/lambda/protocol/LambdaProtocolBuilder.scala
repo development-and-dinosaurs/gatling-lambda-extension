@@ -1,11 +1,24 @@
 package uk.co.developmentanddinosaurs.gatling.lambda.protocol
 
+import com.softwaremill.quicklens.ModifyPimp
+import io.gatling.core.config.GatlingConfiguration
 import software.amazon.awssdk.services.lambda.LambdaClient
 
-case class LambdaProtocolBuilder(
-    lambdaClient: LambdaClient = LambdaClient.create()
-) {
+import scala.language.implicitConversions
+
+object LambdaProtocolBuilder {
+
+  implicit def toLambdaProtocol(
+      builder: LambdaProtocolBuilder
+  ): LambdaProtocol = builder.build
+
+  def apply(configuration: GatlingConfiguration): LambdaProtocolBuilder =
+    LambdaProtocolBuilder(LambdaProtocol(configuration))
+}
+
+final case class LambdaProtocolBuilder(protocol: LambdaProtocol) {
   def client(client: LambdaClient): LambdaProtocolBuilder =
-    copy(lambdaClient = client)
-  def build: LambdaProtocol = LambdaProtocol(lambdaClient)
+    this.modify(_.protocol.lambdaClient).setTo(client)
+
+  def build: LambdaProtocol = protocol
 }

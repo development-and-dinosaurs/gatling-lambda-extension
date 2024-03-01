@@ -20,6 +20,7 @@ dependencies {
     implementation("org.scala-lang:scala-library:${Versions.scala}")
     implementation("io.gatling:gatling-core:${Versions.gatling}")
     implementation("software.amazon.awssdk:lambda:${Versions.awsSdk}")
+    implementation("com.softwaremill.quicklens:quicklens_2.13:1.9.7")
 
     gatling("software.amazon.awssdk:lambda:${Versions.awsSdk}")
 }
