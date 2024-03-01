@@ -1,11 +1,10 @@
-import java.time.Duration
 import java.util.Base64
+
 plugins {
     `maven-publish`
     scala
     signing
     id("com.diffplug.spotless") version Versions.spotless
-    id("io.codearte.nexus-staging") version Versions.nexusStaging
     id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
 }
 
@@ -33,14 +32,23 @@ java {
     withJavadocJar()
 }
 
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             pom {
-                name.set("Gatling Lambda Extension") 
+                name.set("Gatling Lambda Extension")
                 description.set("A Gatling extension for invoking lambda functions.")
-                url.set("https://github.com/toolebox-io/gatling-lambda-extension")
+                url.set("https://github.com/development-and-dinosaurs/gatling-lambda-extension")
                 licenses {
                     license {
                         name.set("The MIT License (MIT)")
@@ -49,14 +57,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        name.set("Sean O'Toole")
-                        email.set("sean@seanotoole.co.uk")
+                        name.set("Tyrannoseanus")
+                        email.set("tyrannoseanus@developmentanddinosaurs.co.uk")
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/toolebox-io/gatling-lambda-extension.git")
-                    developerConnection.set("scm:git@github.com:toolebox-io/gatling-lambda-extension.git")
-                    url.set("https://github.com/toolebox-io/gatling-lambda-extension/")
+                    connection.set("scm:git:https://github.com/development-and-dinosaurs/lambda-gatling-extension.git")
+                    developerConnection.set("scm:git@github.com:development-and-dinosaurs/lambda-gatling-extension.git")
+                    url.set("https://github.com/development-and-dinosaurs/lambda-gatling-extension/")
                 }
             }
         }
@@ -64,34 +72,15 @@ publishing {
 }
 
 signing {
-    val signingKey: String? by project
+    val signingKeyBase64: String? by project
+    val signingKey = decode(signingKeyBase64)
     val signingPassword: String? by project
-    val decodedKey = decode(signingKey)
-    useInMemoryPgpKeys(decodedKey, signingPassword)
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications["mavenJava"])
 }
 
-fun decode(value: String?) =
-    if (value == null) "" else String(Base64.getDecoder().decode(value))
-
-tasks.withType<Sign>().configureEach {
-    onlyIf { project.hasProperty("release") }
-}
-
-nexusStaging {
-    username = project.findProperty("sonatypeUsername") as String?
-    password = project.findProperty("sonatypePassword") as String?
-    packageGroup = project.group.toString()
-    numberOfRetries = 60
-    delayBetweenRetriesInMillis = 5000
-}
-
-nexusPublishing {
-    connectTimeout.set(Duration.ofMinutes(5))
-    clientTimeout.set(Duration.ofMinutes(5))
-    repositories {
-        sonatype()
-    }
+fun decode(base64Key: String?): String {
+    return if (base64Key == null) "" else String(Base64.getDecoder().decode(base64Key))
 }
 
 tasks.withType<AbstractArchiveTask>() {
