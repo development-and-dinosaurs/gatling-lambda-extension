@@ -1,4 +1,4 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.action
+package uk.co.developmentanddinosaurs.gatling.lambda.action
 
 import io.gatling.commons.stats.{KO, OK}
 import io.gatling.commons.util.Clock
@@ -6,13 +6,10 @@ import io.gatling.core.CoreComponents
 import io.gatling.core.Predef.Session
 import io.gatling.core.action.{Action, ExitableAction}
 import io.gatling.core.stats.StatsEngine
-import uk.co.developmentanddinosaurs.gatlinglambdaextension.request.LambdaAttributes
 import software.amazon.awssdk.core.SdkBytes
 import software.amazon.awssdk.services.lambda.LambdaClient
-import software.amazon.awssdk.services.lambda.model.{
-  InvokeRequest,
-  InvokeResponse
-}
+import software.amazon.awssdk.services.lambda.model.{InvokeRequest, InvokeResponse}
+import uk.co.developmentanddinosaurs.gatling.lambda.request.LambdaAttributes
 
 class InvokeAction(
     lambdaClient: LambdaClient,

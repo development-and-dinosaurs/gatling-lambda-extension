@@ -1,4 +1,4 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol
+package uk.co.developmentanddinosaurs.gatling.lambda.protocol
 
 import software.amazon.awssdk.services.lambda.LambdaClient
 

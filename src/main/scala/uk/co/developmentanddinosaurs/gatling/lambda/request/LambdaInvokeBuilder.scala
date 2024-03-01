@@ -1,7 +1,7 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.request
+package uk.co.developmentanddinosaurs.gatling.lambda.request
 
 import io.gatling.core.session.Expression
-import uk.co.developmentanddinosaurs.gatlinglambdaextension.action.InvokeActionBuilder
+import uk.co.developmentanddinosaurs.gatling.lambda.action.InvokeActionBuilder
 
 case class LambdaInvokeBuilder(
     function: Expression[String],

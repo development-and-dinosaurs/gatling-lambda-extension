@@ -1,4 +1,4 @@
-package uk.co.developmentanddinosaurs.gatlinglambdaextension.protocol
+package uk.co.developmentanddinosaurs.gatling.lambda.protocol
 
 import io.gatling.core.protocol.{Protocol, ProtocolKey}
 import software.amazon.awssdk.services.lambda.LambdaClient
