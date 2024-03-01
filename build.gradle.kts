@@ -7,10 +7,10 @@ plugins {
     id("com.diffplug.spotless") version Versions.spotless
     id("io.github.gradle-nexus.publish-plugin") version Versions.nexusPublish
     id("io.gatling.gradle") version Versions.gatling
+    id("uk.co.developmentanddinosaurs.git-versioner") version Versions.gitVersioner
 }
 
 group = "uk.co.developmentanddinosaurs"
-version = "3.6.0.1"
 
 repositories {
     mavenCentral()
@@ -41,6 +41,13 @@ spotless {
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+versioner {
+    startFrom {
+        major = 3
+        minor = 7
+    }
 }
 
 nexusPublishing {
