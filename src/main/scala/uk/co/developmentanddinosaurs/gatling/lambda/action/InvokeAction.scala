@@ -27,8 +27,8 @@ class InvokeAction(
   override def execute(session: Session): Unit = {
     var requestName: String = ""
     if (attr.requestName.isDefined) {
-      attr.requestName.map(
-        name => name(session).map(name => requestName = name + id)
+      attr.requestName.map(name =>
+        name(session).map(name => requestName = name + id)
       )
     } else {
       requestName = "invoke" + id
@@ -37,10 +37,9 @@ class InvokeAction(
     attr.functionName(session).map { function =>
       request.functionName(function)
     }
-    attr.payload.map(
-      payload =>
-        payload(session)
-          .map(payload => request.payload(SdkBytes.fromUtf8String(payload)))
+    attr.payload.map(payload =>
+      payload(session)
+        .map(payload => request.payload(SdkBytes.fromUtf8String(payload)))
     )
 
     if (attr.payload.isDefined) {

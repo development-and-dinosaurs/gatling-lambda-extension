@@ -15,8 +15,8 @@ class LambdaDsl {
   def lambda(function: Expression[String]): InvokeActionBuilder =
     InvokeActionBuilder(function, Option.empty, Option.empty)
 
-  def lambda(
-      implicit configuration: GatlingConfiguration
+  def lambda(implicit
+      configuration: GatlingConfiguration
   ): LambdaProtocolBuilder = LambdaProtocolBuilder(configuration)
 
   implicit def protocolBuilderToProtocol(
