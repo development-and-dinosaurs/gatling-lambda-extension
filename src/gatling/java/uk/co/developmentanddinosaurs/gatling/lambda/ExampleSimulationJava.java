@@ -11,12 +11,12 @@ import uk.co.developmentanddinosaurs.gatling.lambda.javaapi.protocol.LambdaProto
 
 public class ExampleSimulationJava extends Simulation {
 
-  LambdaProtocolBuilder protocol = lambda.client(LambdaClient.create());
-  ScenarioBuilder scenario =
-      scenario("Example Scenario")
-          .exec(lambda("my-lambda-function-name").payload("{\"myKey\": \"myValue\"}"));
-
-  {
+  public ExampleSimulationJava() {
+    LambdaClient client = LambdaClient.create();
+    LambdaProtocolBuilder protocol = lambda.client(client);
+    ScenarioBuilder scenario =
+        scenario("Example Scenario")
+            .exec(lambda("my-lambda-function-name").payload("{\"myKey\": \"myValue\"}"));
     setUp(scenario.injectOpen(atOnceUsers(1))).protocols(protocol);
   }
 }
