@@ -1,6 +1,6 @@
 object Versions {
         const val awsSdk = "2.25.0" // https://central.sonatype.com/artifact/software.amazon.awssdk/bom
-        const val gatling = "3.10.3" // https://central.sonatype.com/artifact/io.gatling/gatling-core
+        const val gatling = "3.11.5" // https://central.sonatype.com/artifact/io.gatling/gatling-core
         const val gitVersioner = "2.0.1" // https://plugins.gradle.org/plugin/uk.co.developmentanddinosaurs.git-versioner
         const val nexusPublish = "2.0.0-rc-2" // https://plugins.gradle.org/plugin/io.github.gradle-nexus.publish-plugin
         const val scala = "2.13.4" // https://central.sonatype.com/artifact/org.scala-lang/scala-library
